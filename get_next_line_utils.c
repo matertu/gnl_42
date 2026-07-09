@@ -6,17 +6,11 @@
 /*   By: msouza-t <msouza-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 16:34:38 by msouza-t          #+#    #+#             */
-/*   Updated: 2026/07/07 19:30:51 by msouza-t         ###   ########.fr       */
+/*   Updated: 2026/07/08 18:47:33 by msouza-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-void	free_storage(char **storage)
-{
-	free(*storage);
-	*storage = NULL;
-}
 
 char	*ft_strjoin(char *storage, char *buffer)
 {
@@ -25,15 +19,16 @@ char	*ft_strjoin(char *storage, char *buffer)
 	size_t	j;
 
 	if (!buffer)
-		return (storage);		
-	new_str = malloc(sizeof(char) * (ft_strlen(storage) + ft_strlen(buffer) + 1));
+		return (storage);
+	new_str = malloc(sizeof(char) * (ft_strlen(storage) + ft_strlen(buffer)
+				+ 1));
 	if (!new_str)
 	{
 		free_storage(&storage);
 		return (NULL);
 	}
 	i = 0;
-	if (*storage)
+	if (storage)
 	{
 		while (storage[i])
 		{
@@ -48,8 +43,7 @@ char	*ft_strjoin(char *storage, char *buffer)
 		j++;
 	}
 	new_str[i + j] = '\0';
-	if (storage)
-		free_storage(&storage);
+	free_storage(&storage);
 	return (new_str);
 }
 
@@ -62,11 +56,11 @@ char	*ft_strchr(char *s, int c)
 		return (NULL);
 	while (s[i] != '\0')
 	{
-		if (s[i] == c)
+		if (s[i] == (char)c)
 			return ((char *)&s[i]);
 		i++;
 	}
-	if (c == '\0')
+	if ((char)c == '\0')
 		return ((char *)&s[i]);
 	return (NULL);
 }
@@ -86,13 +80,35 @@ size_t	ft_strlen(char *s)
 char	*ft_strndup(const char *s, size_t n)
 {
 	size_t	i;
-	size_t	len;
 	char	*new_str;
 
+	if (!s)
+		return (NULL);
+	new_str = malloc(sizeof(char) * (n + 1));
+	if (!new_str)
+		return (NULL);
+	i = 0;
+	while (i < n && s[i])
+	{
+		new_str[i] = s[i];
+		i++;
+	}
+	new_str[i] = '\0';
+	return (new_str);
+}
+
+char	*ft_strdup(const char *s)
+{
+	size_t	len;
+	size_t	i;
+	char	*new_str;
+
+	if (!s)
+		return (NULL);
 	len = 0;
-	while (s[len] && len < n)
+	while (s[len])
 		len++;
-	new_str = (char *)malloc(sizeof(char) * (len + 1));
+	new_str = malloc(sizeof(char) * (len + 1));
 	if (!new_str)
 		return (NULL);
 	i = 0;
@@ -101,5 +117,6 @@ char	*ft_strndup(const char *s, size_t n)
 		new_str[i] = s[i];
 		i++;
 	}
+	new_str[i] = '\0';
 	return (new_str);
 }

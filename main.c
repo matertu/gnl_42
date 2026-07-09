@@ -3,15 +3,17 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-int main()
+int	main(void)
 {
 	char	*read_line;
-	int fd = open("teste.txt", O_RDONLY);
+	int		fd;
+
+	fd = open("teste.txt", O_RDONLY);
 	do
 	{
 		read_line = get_next_line(fd);
 		if (!read_line)
-			break;
+			break ;
 		printf("%s", read_line);
 		free(read_line);
 	} while (read_line);
