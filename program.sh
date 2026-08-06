@@ -1,0 +1,1 @@
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=8 get_next_line_utils.c get_next_line.c main.c && ./a.out

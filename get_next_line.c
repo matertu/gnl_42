@@ -6,7 +6,7 @@
 /*   By: msouza-t <msouza-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 16:30:44 by msouza-t          #+#    #+#             */
-/*   Updated: 2026/07/08 18:47:39 by msouza-t         ###   ########.fr       */
+/*   Updated: 2026/08/05 19:53:49 by msouza-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,27 +52,28 @@ char	*return_line(char **storage)
 
 char	*find_nl(char **storage, int fd)
 {
-	char	buffer[BUFFER_SIZE + 1];
+	char	*buffer;
 	char	*temp;
 	int		read_bytes;
 
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (free_storage(storage), NULL);
 	if (!*storage)
 		*storage = ft_strdup("");
-	if (!*storage)
-		return (NULL);
 	read_bytes = 1;
 	while (!(ft_strchr(*storage, '\n')) && read_bytes > 0)
 	{
-		read_bytes = read(fd, buffer, BUFFER_SIZE);
+		read_bytes = read(fd, &buffer, BUFFER_SIZE);
 		if (read_bytes < 0)
-		{
-			free_storage(storage);
-			return (NULL);
-		}
+			return (free(storage), NULL);
 		buffer[read_bytes] = '\0';
 		temp = ft_strjoin(*storage, buffer);
+		if (!temp)
+			return (free(storage), NULL);
 		*storage = temp;
 	}
+	free(buffer);
 	return (*storage);
 }
 

@@ -6,7 +6,7 @@
 /*   By: msouza-t <msouza-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 16:34:38 by msouza-t          #+#    #+#             */
-/*   Updated: 2026/07/08 18:47:33 by msouza-t         ###   ########.fr       */
+/*   Updated: 2026/08/05 20:02:39 by msouza-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ char	*ft_strjoin(char *storage, char *buffer)
 	size_t	i;
 	size_t	j;
 
-	if (!buffer)
-		return (storage);
-	new_str = malloc(sizeof(char) * (ft_strlen(storage) + ft_strlen(buffer)
-				+ 1));
+	new_str = malloc(ft_strlen(storage) + ft_strlen(buffer) + 1);
 	if (!new_str)
 	{
 		free_storage(&storage);
@@ -38,11 +35,8 @@ char	*ft_strjoin(char *storage, char *buffer)
 	}
 	j = 0;
 	while (buffer[j])
-	{
-		new_str[i + j] = buffer[j];
-		j++;
-	}
-	new_str[i + j] = '\0';
+		new_str[i++] = buffer[j++];
+	new_str[i] = '\0';
 	free_storage(&storage);
 	return (new_str);
 }

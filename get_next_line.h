@@ -6,12 +6,12 @@
 /*   By: msouza-t <msouza-t@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/30 16:31:54 by msouza-t          #+#    #+#             */
-/*   Updated: 2026/07/08 18:50:29 by msouza-t         ###   ########.fr       */
+/*   Updated: 2026/08/05 19:55:50 by msouza-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_HEADER_H
-# define FT_HEADER_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
 # include <stdio.h>
 # include <stdlib.h>
